@@ -34,6 +34,7 @@ def merge(template_str, user_parts):
     param template_str, parts:
     :return:
     """
+    user_parts = ['blank' if part == '' else part for part in user_parts]
     merged = template_str.format(*user_parts)
     return merged
 
@@ -42,7 +43,7 @@ print('''
 Welcome to the madlib game! What wacky stories will you create today?
 ''')
 
-template = read_template('../assets/dark_and_stormy_night_template.txt')
+template = read_template('../assets/video_game.txt')
 
 stripped, parts = parse_template(template)
 
@@ -52,6 +53,7 @@ for word in parts:
     new_word = input(f"Enter a {word}. ")
     new_parts.append(new_word)
 
+print(new_parts)
 madlib = merge(stripped, new_parts)
 
 with open('../assets/new_file.txt', 'w') as file:
